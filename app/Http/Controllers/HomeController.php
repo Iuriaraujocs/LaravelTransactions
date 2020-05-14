@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Domain\Business\RequestHelper;
 use App\Domain\Model\Transaction as ModelTransaction;
 
 class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
+    private $request;
 
-
-     
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
-        $this->transaction = new ModelTransaction();
+        $this->request = new RequestHelper($request);
     }
 
     /**
@@ -33,8 +31,9 @@ class HomeController extends Controller
 
     public function show()
     {
-        $data = ModelTransaction::all();
-        return view('analysis',['record'=>$data]) ;
-        // return view('analysis');
+        $data = ModelTransaction::paginate(15);
+        $pageIterator = $this->request->pageIterator();
+
+        return view('analysis', ['record' => $data, 'pageIterator' => $pageIterator]);
     }
 }

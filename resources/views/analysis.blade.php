@@ -13,7 +13,8 @@
                
                <div class="container mt-4">
                 <p>
-                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseTransactionShow" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <a id="id-btn-collapse" class="btn btn-primary" data-toggle="collapse" href="#collapseTransactionShow" role="button" 
+                    aria-expanded="false" aria-controls="collapseExample">
                         Get Transactions
                      </a>
                 </p>
@@ -33,33 +34,20 @@
                         </thead>
                         <tbody>
                         @if (isset($record))
-                        @foreach ($record as $row)
-                        
-                        <tr>
-                                <th scope="row">{{$loop->count}}</th>
-                                <td>{{$row->client}}</td>
-                                <td>{{$row->deal}}</td>
-                                <td>{{date('d/m/y', strtotime($row->hour))}}</td>
-                                <td>{{$row->accepted}}</td>
-                                <td>{{$row->refused}}</td>
-                            </tr>
-                          
-                          @endforeach
-                    @endif
-                            <!-- <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr> -->
+                            @foreach ($record as $row)
+                                <tr>
+                                    <th scope="row">{{ $pageIterator + $loop->iteration}}</th>
+                                    <td>{{$row->client}}</td>
+                                    <td>{{$row->deal}}</td>
+                                    <td>{{date('d/m/y', strtotime($row->hour))}}</td>
+                                    <td>{{$row->accepted}}</td>
+                                    <td>{{$row->refused}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    {{ $record->links() }}
+                     @endif
     </div>
 </div>
             </div>
@@ -67,3 +55,5 @@
     </div>
 </div>
 @endsection
+
+

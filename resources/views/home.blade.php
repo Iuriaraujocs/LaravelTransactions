@@ -14,17 +14,24 @@
                     <form action="{{route('transaction.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" id="validatedCustomFile" name="csvFile" required>
+                            <input required class="custom-file-input" type="file" name="csvFile" id="validatedCustomFile">
+                            <!-- <input type="file" class="custom-file-input" id="validatedCustomFile" name="csvFile" required> -->
                             <label class="custom-file-label" for="validatedCustomFile">Choose a csv file...</label>
-                            <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            <div class="invalid-feedback">error to process file</div>
+                            
+                            
                         </div>
                         <button type="submit" class="btn btn-primary">Send</button>
-                        <!-- <input class="custom-file" type="file" name="csvFile" id=""> -->
+                       
                         <!-- <button type="submit">Enviar</button> -->
                     </form>
                     @if (isset($result))
-                        <x-AlertSucess/>
-                    @endif
+                        @if($result === 'yes')
+                            <x-AlertSucess/>
+                        @else
+                            <x-AlertDanger/>
+                        @endif
+                    @endisset
                     <!-- <x-AlertDanger/> -->
                 </div>
             </div>
@@ -32,3 +39,4 @@
     </div>
 </div>
 @endsection
+

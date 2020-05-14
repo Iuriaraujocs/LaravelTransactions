@@ -17,13 +17,5 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/analyze', 'HomeController@show')->name('analyze')->middleware('auth');
-
-
-// function () {
-//     return view('pages.home',['teste'=>'iurii ']);
-// })->middleware('auth');
-
-Route::get('/transaction/1', 'Transaction@insert')->middleware('auth');
-Route::get('/transaction', 'Transaction@show')->middleware('auth');
-Route::post('/transaction', 'Transaction@show')->name('transaction.store')->middleware('auth');
+Route::post('/home', 'Transaction@insert')->name('transaction.store')->middleware('auth');
 
