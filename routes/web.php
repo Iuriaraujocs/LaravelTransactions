@@ -19,3 +19,4 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/analyze', 'HomeController@show')->name('analyze')->middleware('auth');
 Route::post('/home', 'Transaction@insert')->name('transaction.store')->middleware('auth');
 
+//novo branch test
